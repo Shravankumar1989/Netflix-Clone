@@ -284,7 +284,7 @@ sudo useradd \
 
 ```
 
-<p>You can use the curl or wget command to download Prometheus.</p>
+<p><b></b>You can use the curl or wget command to download Prometheus.</p></p>
 
 ```sh
 
@@ -292,4 +292,6 @@ sudo useradd \
 wget https://github.com/prometheus/prometheus/releases/download/v2.47.1/prometheus-2.47.1.linux-amd64.tar.gz
 
 ```
+
+<p><b>Then, we need to extract all Prometheus files from the archive</b></p>
 </div>

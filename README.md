@@ -37,6 +37,7 @@
    Now, let's get started and dig deeper into each of these steps:
   </h4>
   <h2><b>Step 1 - Launch an Ubuntu (22.04) T2 Large instance.</b></h2>
+  
   <p><b>Launch an AWS T2 Large instance, using Ubuntu as the image. You can either create a new key pair or use an existing one. In the Security Group, enable HTTP and HTTPS settings, and open all ports (although it's not the best practice to open all ports, it's acceptable for learning purposes).</b></p>
   <p>
     <img src="./public/assets/EC2-Instance-1.png" alt="EC2-Instance-1.png">
@@ -214,5 +215,11 @@ sudo apt-get update
 sudo apt-get install trivy -y
 
 ```
+
+
+<h2><b>Step 3 - Create a TMDB API key.</b></h2>
+<p><b>Next, we will create a TMDB API key. Open a new tab in your browser and search for 'TMDB.'</b></p>
+
+
 
 </div>

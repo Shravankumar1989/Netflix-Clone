@@ -180,5 +180,10 @@ password admin
 
 ```
 
+<img src="./public/assets/SonarQube-2.png" alt="SonarQube-2.png">
+
+<p>Update New password, This is Sonar Dashboard.</p>
+
+<img src="./public/assets/SonarQube-3.jpeg" alt="SonarQube-3.jpeg">
 
 </div>

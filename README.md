@@ -245,6 +245,25 @@ sudo apt-get install trivy -y
 
 <img src="./public/assets/TMDB-6.png" alt="TMDB-6.png">
 
+<p><b>Now click on create.</b></p>
+
+<img src="./public/assets/TMDB-7.png" alt="TMDB-7.png">
+
+<p><b>Click on Developer.</b></p>
+
+<img src="./public/assets/TMDB-8.png" alt="TMDB-8.png">
+
+<p><b>Now you have to accept the terms and conditions.</b></p>
+
+<img src="./public/assets/TMDB-9.png" alt="TMDB-9.png">
+
+<p><b>Provide basic details</b></p>
+
+<img src="./public/assets/TMDB-11.png" alt="TMDB-11.png">
+
+<p><b>Click on submit and you will get your API key.</b></p>
+
+<img src="./public/assets/TMDB-12.png" alt="TMDB-12.png">
 
 
 </div>

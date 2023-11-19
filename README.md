@@ -186,4 +186,33 @@ password admin
 
 <img src="./public/assets/SonarQube-3.jpeg" alt="SonarQube-3.jpeg">
 
+<h3><b>Step 2.2 - To Install Trivy</b></h3>
+
+```sh
+
+# Open or create the file 'trivy.sh' in the vi text editor
+vi trivy.sh
+
+```
+
+
+```sh
+
+# Install necessary packages: wget for downloading files, apt-transport-https for secure repository access, gnupg for encryption, and lsb-release to provide Linux Standard Base information
+sudo apt-get install wget apt-transport-https gnupg lsb-release -y
+
+# Download the GPG key for the Trivy repository and add it to the system's trusted keys
+wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | gpg --dearmor | sudo tee /usr/share/keyrings/trivy.gpg > /dev/null
+
+# Add the Trivy repository to the system's list of sources for packages, using the distribution's codename obtained from lsb_release
+echo "deb [signed-by=/usr/share/keyrings/trivy.gpg] https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main" | sudo tee -a /etc/apt/sources.list.d/trivy.list
+
+# Update the package list to include the newly added Trivy repository
+sudo apt-get update
+
+# Install Trivy, a vulnerability scanner for containers and other artifacts
+sudo apt-get install trivy -y
+
+```
+
 </div>

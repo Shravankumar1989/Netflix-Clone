@@ -39,9 +39,9 @@
   <h2><b>Step 1 - Launch an Ubuntu (22.04) T2 Large instance.</b></h2>
   <p><b>Launch an AWS T2 Large instance, using Ubuntu as the image. You can either create a new key pair or use an existing one. In the Security Group, enable HTTP and HTTPS settings, and open all ports (although it's not the best practice to open all ports, it's acceptable for learning purposes).</b></p>
   <p>
-    <img src="./public/Screenshot 2023-11-19 004518.png" alt="Screenshot 2023-11-19 004518.png">
+    <img src="./public/assets/EC2-Instance-1.png" alt="EC2-Instance-1.png">
     <br /><br />
-    <img src="./public/Screenshot 2023-11-19 005041.png" alt="Screenshot 2023-11-19 005041.png">
+    <img src="./public/assets/EC2-Instance-2.png" alt="EC2-Instance-2.png">
   </p>
   <h2><b>Step 2 - Install Jenkins, Docker, and Trivy. Create a SonarQube container using Docker.</b></h2>
   <h3><b>Step 2.1 - To Install Jenkins</b></h3>

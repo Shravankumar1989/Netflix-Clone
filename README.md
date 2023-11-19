@@ -118,4 +118,17 @@ https://13.229.211.33:8080
 # Display the initial admin password for Jenkins, stored in the specified file
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 ```
+
+
+
+<p>
+    <img src="./public/assets/Jenkins-1.jpeg" alt="Jenkins-1.jpeg">
+    <p>Unlock Jenkins using an administrative password and install the suggested plugins.</p>
+    <img src="./public/assets/Jenkins-4.jpeg" alt="Jenkins-4.jpeg">
+    <p>Jenkins will now be installed, along with all the necessary libraries.</p>
+    <img src="./public/assets/Jenkins-2.jpeg" alt="Jenkins-2.jpeg">
+    <p>Create a user, then click on 'Save and Continue.'</p>
+    <p>This is the Jenkins Getting Started Screen.</p>
+    <img src="./public/assets/Jenkins-3.jpeg" alt="Jenkins-3.jpeg">
+</p>
 </div>

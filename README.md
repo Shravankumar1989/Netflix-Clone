@@ -223,25 +223,25 @@ sudo apt-get install trivy -y
 
 <img src="./public/assets/TMDB-1.png" alt="TMDB-1.png">
 
-<p>Click on the first result, and you will see this page.</p>
+<p><b>Click on the first result, and you will see this page.</b></p>
 
 <img src="./public/assets/TMDB-2.png" alt="TMDB-2.png">
 
-<p>Click on 'Login' at the top right corner. You will then see this page. If you need to create an account,</p>
+<p><b>Click on 'Login' at the top right corner. You will then see this page. If you need to create an account,</b></p>
 
-<p>click on 'Click here.' Since I already have an account, I entered my details there.</p>
+<p><b>click on 'Click here.' Since I already have an account, I entered my details there.</b></p>
 
 <img src="./public/assets/TMDB-3.png" alt="TMDB-3.png">
 
-<p>Once you create an account, you will see this page.</p>
+<p><b>Once you create an account, you will see this page.</b></p>
 
 <img src="./public/assets/TMDB-4.png" alt="TMDB-4.png">
 
-<p>Let's create an API key by clicking on your profile and then on 'Settings'.</p>
+<p><b>Let's create an API key by clicking on your profile and then on 'Settings'.</b></p>
 
 <img src="./public/assets/TMDB-5.png" alt="TMDB-5.png">
 
-<p>Now, click on 'API' in the left side panel.</p>
+<p><b>Now, click on 'API' in the left side panel.</b></p>
 
 <img src="./public/assets/TMDB-6.png" alt="TMDB-6.png">
 

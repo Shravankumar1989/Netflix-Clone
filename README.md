@@ -131,4 +131,39 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
     <p>This is the Jenkins Getting Started Screen.</p>
     <img src="./public/assets/Jenkins-3.jpeg" alt="Jenkins-3.jpeg">
 </p>
+
+<h3><b>Step 2.2 - To Install Docker</b></h3>
+
+```sh
+
+# Update the package lists for upgrades and new package installations
+sudo apt-get update
+
+# Install Docker from the default repository
+sudo apt-get install docker.io -y
+
+# Add the current user to the Docker group to allow running Docker without sudo (in this case, the user is on Ubuntu)
+sudo usermod -aG docker $USER   # my case is ubuntu
+
+# Apply group changes without needing to log out and back in
+newgrp docker
+
+# Change the permissions of the Docker socket to allow all users to access Docker (not recommended for production due to security reasons)
+sudo chmod 777 /var/run/docker.sock
+
+```
+
+
+<p>After the Docker installation, we will create a SonarQube container. Remember to add port 9000 in the security group.</p>
+
+
+```sh
+
+# Run a SonarQube container in detached mode, naming it 'sonar', mapping port 9000 on the host to port 9000 in the container, and using the 'lts-community' tag of the SonarQube image
+docker run -d --name sonar -p 9000:9000 sonarqube:lts-community
+
+```
+
+<p>Now, our SonarQube instance is up and running.</p>
+
 </div>

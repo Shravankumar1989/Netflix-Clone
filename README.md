@@ -283,4 +283,13 @@ sudo useradd \
     --shell /bin/false prometheus
 
 ```
+
+<p>You can use the curl or wget command to download Prometheus.</p>
+
+```sh
+
+# Download the Prometheus v2.47.1 release for Linux (AMD64 architecture) using the wget command
+wget https://github.com/prometheus/prometheus/releases/download/v2.47.1/prometheus-2.47.1.linux-amd64.tar.gz
+
+```
 </div>

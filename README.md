@@ -166,4 +166,19 @@ docker run -d --name sonar -p 9000:9000 sonarqube:lts-community
 
 <p>Now, our SonarQube instance is up and running.</p>
 
+<img src="./public/assets/SonarQube-1.png" alt="SonarQube-1.png" width="454" height="374" >
+
+<p>Enter your username and password, click on 'Login', and then change your password.</p>
+
+```sh
+
+# Username for the login: admin
+username admin
+
+# Password for the login: admin
+password admin
+
+```
+
+
 </div>

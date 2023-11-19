@@ -265,9 +265,22 @@ sudo apt-get install trivy -y
 
 <img src="./public/assets/TMDB-12.png" alt="TMDB-12.png">
 
-<h2><b>Step 2.2 - Install Prometheus and Grafana on the new server.</b></h2>
+<h2><b>Step 4 - Install Prometheus and Grafana on the new server.</b></h2>
 <p><b>First of all, let's create a dedicated Linux user, sometimes called a system account, for Prometheus. Having individual users for each service serves two main purposes.</b></p>
 <p><b>First, it acts as a security measure to reduce the impact in case of an incident involving the service.</b></p>
 <p><b>Second, it simplifies administration by making it easier to determine which resources belong to which service.</b></p>
 <p><b>To create a system user or system account, run the following command:</b></p>
+
+```sh
+
+# Add a new user named 'prometheus' using the 'useradd' command
+sudo useradd \
+    # The '--system' flag creates a system account for background services
+    --system \
+    # The '--no-create-home' flag specifies not to create a home directory for the user
+    --no-create-home \
+    # The '--shell /bin/false' option sets a shell that prevents interactive login
+    --shell /bin/false prometheus
+
+```
 </div>

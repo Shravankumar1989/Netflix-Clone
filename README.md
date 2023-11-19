@@ -39,9 +39,9 @@
   <h2><b>Step 1 - Launch an Ubuntu (22.04) T2 Large instance.</b></h2>
   <p><b>Launch an AWS T2 Large instance, using Ubuntu as the image. You can either create a new key pair or use an existing one. In the Security Group, enable HTTP and HTTPS settings, and open all ports (although it's not the best practice to open all ports, it's acceptable for learning purposes).</b></p>
   <p>
-    <img src="./public/Screenshot 2023-11-19 004518.png" alt="Screenshot 2023-11-19 004518.png">
+    <img src="./public/assets/EC2-Instance-1.png" alt="EC2-Instance-1.png">
     <br /><br />
-    <img src="./public/Screenshot 2023-11-19 005041.png" alt="Screenshot 2023-11-19 005041.png">
+    <img src="./public/assets/EC2-Instance-2.png" alt="EC2-Instance-2.png">
   </p>
   <h2><b>Step 2 - Install Jenkins, Docker, and Trivy. Create a SonarQube container using Docker.</b></h2>
   <h3><b>Step 2.1 - To Install Jenkins</b></h3>
@@ -118,4 +118,52 @@ https://13.229.211.33:8080
 # Display the initial admin password for Jenkins, stored in the specified file
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 ```
+
+
+
+<p>
+    <img src="./public/assets/Jenkins-1.jpeg" alt="Jenkins-1.jpeg">
+    <p>Unlock Jenkins using an administrative password and install the suggested plugins.</p>
+    <img src="./public/assets/Jenkins-4.jpeg" alt="Jenkins-4.jpeg">
+    <p>Jenkins will now be installed, along with all the necessary libraries.</p>
+    <img src="./public/assets/Jenkins-2.jpeg" alt="Jenkins-2.jpeg">
+    <p>Create a user, then click on 'Save and Continue.'</p>
+    <p>This is the Jenkins Getting Started Screen.</p>
+    <img src="./public/assets/Jenkins-3.jpeg" alt="Jenkins-3.jpeg">
+</p>
+
+<h3><b>Step 2.2 - To Install Docker</b></h3>
+
+```sh
+
+# Update the package lists for upgrades and new package installations
+sudo apt-get update
+
+# Install Docker from the default repository
+sudo apt-get install docker.io -y
+
+# Add the current user to the Docker group to allow running Docker without sudo (in this case, the user is on Ubuntu)
+sudo usermod -aG docker $USER   # my case is ubuntu
+
+# Apply group changes without needing to log out and back in
+newgrp docker
+
+# Change the permissions of the Docker socket to allow all users to access Docker (not recommended for production due to security reasons)
+sudo chmod 777 /var/run/docker.sock
+
+```
+
+
+<p>After the Docker installation, we will create a SonarQube container. Remember to add port 9000 in the security group.</p>
+
+
+```sh
+
+# Run a SonarQube container in detached mode, naming it 'sonar', mapping port 9000 on the host to port 9000 in the container, and using the 'lts-community' tag of the SonarQube image
+docker run -d --name sonar -p 9000:9000 sonarqube:lts-community
+
+```
+
+<p>Now, our SonarQube instance is up and running.</p>
+
 </div>

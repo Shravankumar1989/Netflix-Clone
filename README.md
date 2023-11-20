@@ -294,4 +294,51 @@ wget https://github.com/prometheus/prometheus/releases/download/v2.47.1/promethe
 ```
 
 <p><b>Then, we need to extract all Prometheus files from the archive</b></p>
+
+```sh
+
+# Extract the Prometheus archive using the tar command, with options to list the files being extracted (verbose) and to extract from a gzip file
+tar -xvf prometheus-2.47.1.linux-amd64.tar.gz
+
+```
+
+
+<p><b>Usually, you would have a disk mounted to the data directory. For this tutorial, however, I will simply create a /data directory. <br/>Additionally, a folder is needed for the Prometheus configuration files.</b></p>
+
+
+```sh
+
+# Create the directories '/data' for storing Prometheus data and '/etc/prometheus' for its configuration files, using the 'mkdir' command with '-p' to make parent directories as needed
+sudo mkdir -p /data /etc/prometheus
+
+```
+
+<p><b>Now, let's change to the Prometheus directory and move some files.</b></p>
+
+```sh
+
+# Change the current working directory to 'prometheus-2.47.1.linux-amd64', which is the directory created after extracting the Prometheus archive
+cd prometheus-2.47.1.linux-amd64/
+
+```
+
+<p><b>First of all, let's move the Prometheus binary and promtool to /usr/local/bin. Promtool is used to check configuration files and Prometheus rules.</b></p>
+
+
+```sh
+
+# Move the 'prometheus' binary and 'promtool' to '/usr/local/bin/' to make them accessible system-wide
+sudo mv prometheus promtool /usr/local/bin/
+
+```
+
+<p><b>Optionally, we can move the console libraries to the Prometheus configuration directory. <br/>Console templates, which utilize the Go templating language, allow for the creation of arbitrary consoles. <br/>If you're just getting started, you don't need to worry about this step.</b></p>
+
+
+```sh
+
+# Move the 'consoles' and 'console_libraries' directories to '/etc/prometheus/' to make them available for Prometheus configuration
+sudo mv consoles/ console_libraries/ /etc/prometheus/
+
+```
 </div>

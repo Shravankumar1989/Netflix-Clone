@@ -454,4 +454,52 @@ WantedBy=multi-user.target
 <p><b>'--web.enable-lifecycle' allows you to manage Prometheus, for example, to reload its configuration without restarting the service.</b></p>
 <p><b>To automatically start Prometheus after a reboot, use the 'enable' command.</b></p>
 
+
+```sh
+
+# Enable the Prometheus service to start automatically at system boot using systemctl
+sudo systemctl enable prometheus
+
+```
+<p><b>Then just start the Prometheus.</b></p>
+
+```sh
+
+# Start the Prometheus service immediately using systemctl
+sudo systemctl start prometheus
+
+```
+
+<p><b>To check the status of Prometheus run the following command:</b></p>
+
+```sh
+
+# Check the current status of the Prometheus service using systemctl
+sudo systemctl status prometheus
+
+```
+
+
+<p><b>Suppose you encounter any issues with Prometheus or are unable to start it. In that case, the easiest way to identify the problem is to use the journalctl command and search for errors.</b></p>
+
+```sh
+
+# Use journalctl to display and follow the real-time log output of the Prometheus service, without using a pager
+journalctl -u prometheus -f --no-pager
+
+```
+
+<p><b>Now, we can try to access Prometheus via the browser using the IP address of the Ubuntu server. Remember to append port 9090 to the IP address.</b></p>
+
+```sh
+
+<public-ip:9090>
+#Example
+https://13.229.211.33:9090
+
+```
+
+<img src="./public/assets/TMDB-9.png" alt="TMDB-9.png">
+
+
 </div>

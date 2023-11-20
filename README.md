@@ -509,4 +509,121 @@ https://13.229.211.33:9090
 
 <p><b>First, let's create a system user for Node Exporter by running the following command:"</b></p>
 
+
+```sh
+
+# Add a new system user named 'node_exporter' using the 'useradd' command
+sudo useradd \
+    # The '--system' flag creates a system account for background services
+    --system \
+    # The '--no-create-home' flag specifies not to create a home directory for the user
+    --no-create-home \
+    # The '--shell /bin/false' option sets a shell that prevents interactive login
+    --shell /bin/false node_exporter
+
+```
+<p><b>Use the wget command to download the binary.</b></p>
+
+```sh
+
+# Download the Node Exporter v1.6.1 release for Linux (AMD64 architecture) using the wget command
+wget https://github.com/prometheus/node_exporter/releases/download/v1.6.1/node_exporter-1.6.1.linux-amd64.tar.gz
+
+```
+
+<p><b>Extract the Node Exporter from the archive.</b></p>
+
+```sh
+
+# Extract the Node Exporter archive using the tar command, with options to list the files being extracted (verbose) and to extract from a gzip file
+tar -xvf node_exporter-1.6.1.linux-amd64.tar.gz
+
+```
+
+<p><b>Move the binary to /usr/local/bin.</b></p>
+
+```sh
+
+# Move the Node Exporter binary from the extracted directory to '/usr/local/bin/' for system-wide access
+sudo mv \
+  node_exporter-1.6.1.linux-amd64/node_exporter \
+  /usr/local/bin/
+
+```
+
+
+<p><b>Clean up by deleting the Node Exporter archive and folder.</b></p>
+
+```sh
+
+# Remove the Node Exporter directory and any files beginning with 'node_exporter', forcefully and recursively
+rm -rf node_exporter*
+
+```
+
+<p><b>Verify that you can run the binary.</b></p>
+
+```sh
+
+# Check the version of Node Exporter installed by running the Node Exporter binary with the '--version' flag
+node_exporter --version
+
+```
+
+<p><b>Node Exporter offers many plugins that can be enabled. Running Node Exporter with the help option will display all available options.</b></p>
+
+```sh
+
+# Display the help information for the Node Exporter command, including available options and flags
+node_exporter --help
+
+```
+
+<p><b>We're going to enable the login controller (--collector.logind) for the demo.</b></p>
+
+<p><b>Next, create a similar systemd unit file.</b></p>
+
+```sh
+
+# Open or create a new Systemd service file for Node Exporter using the vim editor, located at '/etc/systemd/system/node_exporter.service'
+sudo vim /etc/systemd/system/node_exporter.service
+
+```
+
+<h4><b>node_exporter.service</b></h4>
+
+```sh
+
+[Unit]
+# Description of the service
+Description=Node Exporter
+# Specifies that the service wants the network to be online before starting
+Wants=network-online.target
+# Specifies that the service should start after the network is online
+After=network-online.target
+
+# Configures the rate limiting for service restart attempts
+StartLimitIntervalSec=500
+StartLimitBurst=5
+
+[Service]
+# User and group under which the service will run
+User=node_exporter
+Group=node_exporter
+# Type of service, 'simple' means systemd considers the service up as soon as the ExecStart process runs
+Type=simple
+# Service restart policy on failure
+Restart=on-failure
+# Time to wait before restarting the service
+RestartSec=5s
+# Command to start Node Exporter, along with its flags
+ExecStart=/usr/local/bin/node_exporter \
+    --collector.logind   # Enable the login session collector
+
+[Install]
+# Defines the target that the service should be installed into
+WantedBy=multi-user.target
+
+
+```
 </div>

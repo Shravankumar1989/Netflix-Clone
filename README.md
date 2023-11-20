@@ -921,6 +921,53 @@ http://<ip>:9090/targets
 
 <p><b>Install Email Extension Plugin in Jenkins</b></p>
 
+<img src="./public/assets/Jenkins-7.png" alt="Jenkins-7.png">
+
+<p><b>Go to your Gmail and click on your profile</b></p>
+
+<p><b>Then click on Manage Your Google Account --> click on the security tab on the left side panel you will get this page(provide mail password).</b></p>
+
+<img src="./public/assets/Jenkins-8.png" alt="Jenkins-8.png">
+
+<p><b>2-step verification should be enabled.</b></p>
+
+<p><b>Search for the app in the search bar you will get app passwords like the below image</b></p>
+
+<img src="./public/assets/Jenkins-9.png" alt="Jenkins-9.png">
+
+<img src="./public/assets/Jenkins-10.png" alt="Jenkins-10.png">
+
+<p><b>Click on other and provide your name and click on Generate and copy the password</b></p>
+
+<img src="./public/assets/Jenkins-11.png" alt="Jenkins-11.png">
+
+<p><b>In the new update, you will get a password like this</b></p>
+
+<img src="./public/assets/Jenkins-12.png" alt="Jenkins-12.png">
+
+<p><b>Once the plugin is installed in Jenkins, click on manage Jenkins --> configure system there under the E-mail Notification section configure the details as shown in the below image</b></p>
+
+<img src="./public/assets/Jenkins-13.png" alt="Jenkins-13.png">
+
+<img src="./public/assets/Jenkins-14.png" alt="Jenkins-14.png">
+
+<p><b>Click on Apply and save.</b></p>
+
+<p><b>Click on Manage Jenkins--> credentials and add your mail username and generated password</b></p>
+
+<img src="./public/assets/Jenkins-15.png" alt="Jenkins-15.png">
+
+<p><b>This is to just verify the mail configuration</b></p>
+
+<p><b>Now under the Extended E-mail Notification section configure the details as shown in the below images</b></p>
+
+<img src="./public/assets/Jenkins-16.png" alt="Jenkins-16.png">
+
+<img src="./public/assets/Jenkins-17.png" alt="Jenkins-17.png">
+
+<img src="./public/assets/Jenkins-18.png" alt="Jenkins-18.png">
+<p><b></b></p>
+<p><b></b></p>
 
 
 </div>

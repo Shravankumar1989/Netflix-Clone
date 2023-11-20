@@ -966,7 +966,9 @@ http://<ip>:9090/targets
 <img src="./public/assets/Jenkins-17.png" alt="Jenkins-17.png">
 
 <img src="./public/assets/Jenkins-18.png" alt="Jenkins-18.png">
-<p><b></b></p>
+<p><b>Click on Apply and save.</b></p>
+
+
 <p><b></b></p>
 
 

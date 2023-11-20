@@ -499,7 +499,7 @@ https://13.229.211.33:9090
 
 ```
 
-<img src="./public/assets/Prometheus-1.png" alt="Prometheus-1.png">
+<img src="./public/assets/Prometheus-2.png" alt="Prometheus-2.png">
 
 
 </div>

@@ -814,11 +814,11 @@ sudo systemctl status grafana-server
 
 <p><b>Let's add Dashboard for a better view</b></p>
 
-<img src="./public/assets/Grafana-7.png" alt="Grafana-7.png">
+<img src="./public/assets/Grafana-8.png" alt="Grafana-8.png">
 
 <p><b>Click on Import Dashboard paste this code 1860 and click on load</b></p>
 
-<img src="./public/assets/Grafana-8.png" alt="Grafana-8.png">
+
 
 
 

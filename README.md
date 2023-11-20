@@ -501,5 +501,12 @@ https://13.229.211.33:9090
 
 <img src="./public/assets/Prometheus-2.png" alt="Prometheus-2.png">
 
+<p><b>If you go to the 'Targets' section, you should see only one target, which is Prometheus itself. It scrapes its metrics every 15 seconds by default.</b></p>
+
+<h2><b>Install Node Exporter on Ubuntu 22.04</b></h2>
+
+<p><b>Next, we're going to set up and configure Node Exporter to collect Linux system metrics, such as CPU load and disk I/O. Node Exporter will expose these metrics in a Prometheus-compatible format. Since the installation process is very similar to that of Prometheus, I will not cover it in as much detail.</b></p>
+
+<p><b>First, let's create a system user for Node Exporter by running the following command:"</b></p>
 
 </div>

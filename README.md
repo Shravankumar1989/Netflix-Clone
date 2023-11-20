@@ -828,7 +828,23 @@ sudo systemctl status grafana-server
 
 <img src="./public/assets/Grafana-11.png" alt="Grafana-11.png">
 
+<h2><b>Step 5 - Install the Prometheus Plugin and Integrate it with the Prometheus server</b></h2>
 
+<p><b>Let's Monitor JENKINS SYSTEM</b></p>
+
+<p><b>Need Jenkins up and running machine</b></p>
+
+<p><b>Goto Manage Jenkins --> Plugins --> Available Plugins</b></p>
+
+<p><b>Search for Prometheus and install it</b></p>
+
+<img src="./public/assets/Jenkins-5.png" alt=Jenkins-5.png">
+
+<p><b>Once that is done you will Prometheus is set to /Prometheus path in system configurations</b></p>
+
+<img src="./public/assets/Jenkins-6.png" alt=Jenkins-6.png">
+
+<p><b>Nothing to change click on apply and save</b></p>
 
 <p><b>To create a static target, you need to add job_name with static_configs. go to Prometheus server</b></p>
 

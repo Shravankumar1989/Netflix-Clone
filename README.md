@@ -341,4 +341,107 @@ sudo mv prometheus promtool /usr/local/bin/
 sudo mv consoles/ console_libraries/ /etc/prometheus/
 
 ```
+
+
+<p><b>Finally, let's move the example Prometheus configuration file to the main configuration location.</b></p>
+
+```sh
+
+# Move the Prometheus configuration file 'prometheus.yml' to the '/etc/prometheus/' directory, renaming it as necessary
+sudo mv prometheus.yml /etc/prometheus/prometheus.yml
+
+```
+
+<p><b>To avoid permission issues, you need to set the correct ownership for the /etc/prometheus/ directory and the data directory.</b></p>
+
+
+```sh
+
+# Change the ownership of the '/etc/prometheus/' and '/data/' directories to the 'prometheus' user and group, recursively
+sudo chown -R prometheus:prometheus /etc/prometheus/ /data/
+
+```
+
+<p><b>You can delete the archive and the Prometheus folder once you are finished.</b></p>
+
+```sh
+
+# Change the current working directory to the user's home directory
+cd
+
+# Remove the Prometheus archive file 'prometheus-2.47.1.linux-amd64.tar.gz' forcefully and recursively
+rm -rf prometheus-2.47.1.linux-amd64.tar.gz
+
+```
+
+<p><b>Verify that you can execute the Prometheus binary by running the following command:</b></p>
+
+```sh
+
+# Check the version of Prometheus installed by running the Prometheus binary with the '--version' flag
+prometheus --version
+
+```
+
+<p><b>To get more information and configuration options, run Prometheus Help.</b></p>
+
+```sh
+
+# Display the help information for the Prometheus command, including available options and flags
+prometheus --help
+
+```
+
+<p><b>We're going to use some of these options in the service definition. <br/>We'll be using Systemd, a system and service manager for Linux operating systems, and <br/>for this purpose, we need to create a Systemd unit configuration file.</b></p>
+
+
+```sh
+
+# Open or create a new Systemd service file for Prometheus using the vim editor, located at '/etc/systemd/system/prometheus.service'
+sudo vim /etc/systemd/system/prometheus.service
+
+```
+
+<h3><b>Prometheus.service</b></h3>
+
+```sh
+
+[Unit]
+# Description of the service
+Description=Prometheus
+# Specifies that the service wants the network to be online before starting
+Wants=network-online.target
+# Specifies that the service should start after the network is online
+After=network-online.target
+
+# Configures the rate limiting for service restart attempts
+StartLimitIntervalSec=500
+StartLimitBurst=5
+
+[Service]
+# User and group under which the service will run
+User=prometheus
+Group=prometheus
+# Type of service, 'simple' means systemd considers the service up as soon as the ExecStart process runs
+Type=simple
+# Service restart policy on failure
+Restart=on-failure
+# Time to wait before restarting the service
+RestartSec=5s
+# Command to start Prometheus, along with its flags
+ExecStart=/usr/local/bin/prometheus \
+  --config.file=/etc/prometheus/prometheus.yml \  # Path to the configuration file
+  --storage.tsdb.path=/data \                      # Path for storing time series data
+  --web.console.templates=/etc/prometheus/consoles \ # Path to the console templates
+  --web.console.libraries=/etc/prometheus/console_libraries \ # Path to the console libraries
+  --web.listen-address=0.0.0.0:9090 \               # Network address on which to expose the web interface and API
+  --web.enable-lifecycle                           # Enable lifecycle APIs for remote service management
+
+[Install]
+# Defines the target that the service should be installed into
+WantedBy=multi-user.target
+
+
+```
+
 </div>

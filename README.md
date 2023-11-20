@@ -626,4 +626,9 @@ WantedBy=multi-user.target
 
 
 ```
+
+<p><b>Replace Prometheus user and group to node_exporter, and update the ExecStart command.</b></p>
+<p><b>To automatically start the Node Exporter after reboot, enable the service.</b></p>
+
+
 </div>

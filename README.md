@@ -901,14 +901,13 @@ http://<ip>:9090/targets
 
 <img src="./public/assets/Prometheus-3.png" alt="Prometheus-3.png">
 
-
 <p><b>Let's add Dashboard for a better view in Grafana</b></p>
 
 <p><b>Click On Dashboard --> + symbol --> Import Dashboard</b></p>
 
 <p><b>Use Id 9964 and click on load</b></p>
 
-
+<img src="./public/assets/Grafana-12.png" alt="Grafana-12.png">
 
 ```sh
 

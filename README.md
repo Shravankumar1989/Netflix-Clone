@@ -637,7 +637,7 @@ WantedBy=multi-user.target
 sudo systemctl enable node_exporter
 
 ```
-<p><b></b></p>
+<p><b>Then start the Node Exporter.</b></p>
 
 ```sh
 
@@ -645,7 +645,7 @@ sudo systemctl enable node_exporter
 sudo systemctl start node_exporter
 
 ```
-<p><b></b></p>
+<p><b>Check the status of Node Exporter with the following command:</b></p>
 
 ```sh
 
@@ -653,7 +653,7 @@ sudo systemctl start node_exporter
 sudo systemctl status node_exporter
 
 ```
-<p><b></b></p>
+<p><b>If you have any issues, check logs with journalctl</b></p>
 
 ```sh
 
@@ -661,7 +661,7 @@ sudo systemctl status node_exporter
 journalctl -u node_exporter -f --no-pager
 
 ```
-<p><b></b></p>
+<p><b>To create a static target, you need to add a job_name along with static_configs in the Prometheus server configuration.</b></p>
 
 ```sh
 
@@ -669,7 +669,7 @@ journalctl -u node_exporter -f --no-pager
 sudo vim /etc/prometheus/prometheus.yml
 
 ```
-<p><b></b></p>
+<p><b>prometheus.yml</b></p>
 
 ```sh
 
@@ -681,7 +681,9 @@ sudo vim /etc/prometheus/prometheus.yml
       - targets: ["localhost:9100"]
 
 ```
-<p><b></b></p>
+<p><b>By default, Node Exporter will be exposed on port 9100.</b></p>
+<p><b>Since we enabled lifecycle management via API calls, we can reload the Prometheus config without restarting the service and causing downtime.</b></p>
+<p><b>Before, restarting check if the config is valid.</b></p>
 
 ```sh
 
@@ -689,7 +691,7 @@ sudo vim /etc/prometheus/prometheus.yml
 promtool check config /etc/prometheus/prometheus.yml
 
 ```
-<p><b></b></p>
+<p><b>Then, you can use a POST request to reload the config.</b></p>
 
 ```sh
 
@@ -697,7 +699,7 @@ promtool check config /etc/prometheus/prometheus.yml
 curl -X POST http://localhost:9090/-/reload
 
 ```
-<p><b></b></p>
+<p><b>Check the targets section</b></p>
 
 ```sh
 
@@ -705,7 +707,10 @@ curl -X POST http://localhost:9090/-/reload
 http://<ip>:9090/targets
 
 ```
-<p><b></b></p>
+
+<h2><b>Install Grafana on Ubuntu 22.04</b></h2>
+<p><b>To visualize metrics we can use Grafana. There are many different data sources that Grafana supports, one of them is Prometheus.</b></p>
+<p><b>First, let's make sure that all the dependencies are installed.</b></p>
 
 ```sh
 
@@ -713,7 +718,7 @@ http://<ip>:9090/targets
 sudo apt-get install -y apt-transport-https software-properties-common
 
 ```
-<p><b></b></p>
+<p><b>Next, add the GPG key.</b></p>
 
 ```sh
 
@@ -721,7 +726,7 @@ sudo apt-get install -y apt-transport-https software-properties-common
 wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
 
 ```
-<p><b></b></p>
+<p><b>Add this repository for stable releases.</b></p>
 
 ```sh
 
@@ -729,23 +734,18 @@ wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
 echo "deb https://packages.grafana.com/oss/deb stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
 
 ```
-<p><b></b></p>
+<p><b>After you add the repository, update and install Garafana.</b></p>
 
 ```sh
 
 #Update the package lists with the new Grafana repository.
 sudo apt-get update
 
-```
-<p><b></b></p>
-
-```sh
-
 #Install Grafana.
 sudo apt-get -y install grafana
 
 ```
-<p><b></b></p>
+<p><b>To automatically start the Grafana after reboot, enable the service.</b></p>
 
 ```sh
 
@@ -753,7 +753,7 @@ sudo apt-get -y install grafana
 sudo systemctl enable grafana-server
 
 ```
-<p><b></b></p>
+<p><b>Then start the Grafana.</b></p>
 
 ```sh
 
@@ -761,7 +761,7 @@ sudo systemctl enable grafana-server
 sudo systemctl start grafana-server
 
 ```
-<p><b></b></p>
+<p><b>To check the status of Grafana, run the following command:</b></p>
 
 ```sh
 
@@ -769,7 +769,7 @@ sudo systemctl start grafana-server
 sudo systemctl status grafana-server
 
 ```
-<p><b></b></p>
+<p><b>Go to http://<ip>:3000 and log in to the Grafana using default credentials. The username is admin, and the password is admin as well.</b></p>
 
 ```sh
 
@@ -779,7 +779,7 @@ sudo systemctl status grafana-server
   password admin
 
 ```
-<p><b></b></p>
+<p><b>For the URL, enter localhost:9090 and click Save and test. You can see Data source is working.</b></p>
 
 ```sh
 
@@ -787,7 +787,7 @@ sudo systemctl status grafana-server
 <public-ip:9090>
 
 ```
-<p><b></b></p>
+<p><b>To create a static target, you need to add job_name with static_configs. go to Prometheus server</b></p>
 
 ```sh
 #Open the Prometheus configuration file again for further editing.

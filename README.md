@@ -781,7 +781,23 @@ sudo systemctl status grafana-server
   password admin
 
 ```
+
+<img src="./public/assets/Grafana-1.png" alt="Grafana-1.png">
+
+<p><b>When you log in for the first time, you get the option to change the password.</b></p>
+
+<img src="./public/assets/Grafana-2.png" alt="Grafana-2.png">
+
+<p><b>To visualize metrics, you need to add a data source first.</b></p>
+
+<img src="./public/assets/Grafana-3.png" alt="Grafana-3.png">
+
+<p><b>Click Add data source and select Prometheus.</b></p>
+
+<img src="./public/assets/Grafana-4.png" alt="Grafana-4.png">
+
 <p><b>For the URL, enter localhost:9090 and click Save and test. You can see Data source is working.</b></p>
+
 
 ```sh
 

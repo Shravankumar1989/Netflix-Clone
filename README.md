@@ -818,10 +818,15 @@ sudo systemctl status grafana-server
 
 <p><b>Click on Import Dashboard paste this code 1860 and click on load</b></p>
 
+<img src="./public/assets/Grafana-9.png" alt="Grafana-9.png">
 
+<p><b>Select the Datasource and click on Import</b></p>
 
+<img src="./public/assets/Grafana-10.png" alt="Grafana-10.png">
 
+<p><b>You will see this output</b></p>
 
+<img src="./public/assets/Grafana-11.png" alt="Grafana-11.png">
 
 
 

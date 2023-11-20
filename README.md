@@ -851,17 +851,154 @@ sudo systemctl status grafana-server
 
 
 ```sh
+
 #Open the Prometheus configuration file again for further editing.
 sudo vim /etc/prometheus/prometheus.yml
 
+```
+
+<p><b>Paste below code</b></p>
+
+```sh
+
+- job_name: 'jenkins'                   # Define a new job named 'jenkins'
+  metrics_path: '/prometheus'           # Set the path to scrape metrics from
+  static_configs:                       # Begin static configuration block
+    - targets: ['<jenkins-ip>:8080']    # Specify the Jenkins target, with its IP and port
 
 ```
+
+<p><b>Before, restarting check if the config is valid.</b></p>
+
+```sh
+
+#Validate the Prometheus configuration file for syntax correctness
+promtool check config /etc/prometheus/prometheus.yml
+
+```
+
+<p><b>Then, you can use a POST request to reload the config.</b></p>
+
+```sh
+
+# 23. Reload the Prometheus configuration without restarting the service
+curl -X POST http://localhost:9090/-/reload
+
+
+```
+
+<p><b>Check the targets section</b></p>
+
+```sh
+
+#Access the Prometheus targets page in a web browser (replace <ip> with your server's IP)
+http://<ip>:9090/targets
+
+
+```
+
+<p><b>You will see Jenkins is added to it</b></p>
+
+
+
+
+
+
+```sh
+
+
+
+
+```
+
 <p><b></b></p>
 
 ```sh
 
 
 
+
 ```
+
 <p><b></b></p>
+
+```sh
+
+
+
+
+```
+
+<p><b></b></p>
+
+```sh
+
+
+
+
+```
+
+<p><b></b></p>
+
+```sh
+
+
+
+
+```
+
+<p><b></b></p>
+
+```sh
+
+
+
+
+```
+
+<p><b></b></p>
+
+```sh
+
+
+
+
+```
+
+<p><b></b></p>
+
+```sh
+
+
+
+
+```
+
+<p><b></b></p>
+
+```sh
+
+
+
+
+```
+
+<p><b></b></p>
+
+```sh
+
+
+
+
+```
+
+<p><b></b></p>
+
+```sh
+
+
+
+
+```
+
 </div>

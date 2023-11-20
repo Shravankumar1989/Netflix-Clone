@@ -631,4 +631,176 @@ WantedBy=multi-user.target
 <p><b>To automatically start the Node Exporter after reboot, enable the service.</b></p>
 
 
+```sh
+
+#Enable the Node Exporter service to start automatically at system boot.
+sudo systemctl enable node_exporter
+
+```
+<p><b></b></p>
+
+```sh
+
+#Start the Node Exporter service immediately.
+sudo systemctl start node_exporter
+
+```
+<p><b></b></p>
+
+```sh
+
+#Check the current status of the Node Exporter service.
+sudo systemctl status node_exporter
+
+```
+<p><b></b></p>
+
+```sh
+
+#Display the real-time log output of the Node Exporter service, without paging through the output.
+journalctl -u node_exporter -f --no-pager
+
+```
+<p><b></b></p>
+
+```sh
+
+#Open the Prometheus configuration file for editing using the vim text editor.
+sudo vim /etc/prometheus/prometheus.yml
+
+```
+<p><b></b></p>
+
+```sh
+
+#Define a job named 'node_export' in the Prometheus configuration.
+  - job_name: node_export
+    #Set static configurations for the job.
+    static_configs:
+      #Specify localhost and port 9100 as the target for this job.
+      - targets: ["localhost:9100"]
+
+```
+<p><b></b></p>
+
+```sh
+
+#Validate the Prometheus configuration file for syntax correctness.
+promtool check config /etc/prometheus/prometheus.yml
+
+```
+<p><b></b></p>
+
+```sh
+
+#Send a POST request to reload the Prometheus configuration without restarting the service.
+curl -X POST http://localhost:9090/-/reload
+
+```
+<p><b></b></p>
+
+```sh
+
+#URL to access the Prometheus targets page in a web browser (replace <ip> with your server's IP address).
+http://<ip>:9090/targets
+
+```
+<p><b></b></p>
+
+```sh
+
+#Install packages to enable HTTPS for package repositories and software management.
+sudo apt-get install -y apt-transport-https software-properties-common
+
+```
+<p><b></b></p>
+
+```sh
+
+#Download and add the Grafana repository GPG key.
+wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
+
+```
+<p><b></b></p>
+
+```sh
+
+#Add the Grafana package repository.
+echo "deb https://packages.grafana.com/oss/deb stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
+
+```
+<p><b></b></p>
+
+```sh
+
+#Update the package lists with the new Grafana repository.
+sudo apt-get update
+
+```
+<p><b></b></p>
+
+```sh
+
+#Install Grafana.
+sudo apt-get -y install grafana
+
+```
+<p><b></b></p>
+
+```sh
+
+#Enable Grafana server to start automatically at system boot.
+sudo systemctl enable grafana-server
+
+```
+<p><b></b></p>
+
+```sh
+
+#Start the Grafana server service.
+sudo systemctl start grafana-server
+
+```
+<p><b></b></p>
+
+```sh
+
+#Check the current status of the Grafana server service.
+sudo systemctl status grafana-server
+
+```
+<p><b></b></p>
+
+```sh
+
+  #Default Grafana admin username.
+  username admin
+  #Default Grafana admin password.
+  password admin
+
+```
+<p><b></b></p>
+
+```sh
+
+#URL to access Prometheus web UI (replace <public-ip> with your server's public IP address).
+<public-ip:9090>
+
+```
+<p><b></b></p>
+
+```sh
+#Open the Prometheus configuration file again for further editing.
+sudo vim /etc/prometheus/prometheus.yml
+
+
+```
+<p><b></b></p>
+
+```sh
+
+
+
+```
+<p><b></b></p>
 </div>

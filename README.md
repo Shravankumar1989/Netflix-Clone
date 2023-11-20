@@ -909,92 +909,18 @@ http://<ip>:9090/targets
 
 <img src="./public/assets/Grafana-12.png" alt="Grafana-12.png">
 
-```sh
+<p><b>Select the data source and click on Import</b></p>
+
+<img src="./public/assets/Grafana-13.png" alt="Grafana-13.png">
+
+<p><b>Now you will see the Detailed overview of Jenkins</b></p>
+
+<img src="./public/assets/Grafana-14.png" alt="Grafana-14.png">
+
+<h2><b>Step 6 — Email Integration With Jenkins and Plugin Setup</b></h2>
+
+<p><b>Install Email Extension Plugin in Jenkins</b></p>
 
 
-
-
-```
-
-<p><b></b></p>
-
-```sh
-
-
-
-
-```
-
-<p><b></b></p>
-
-```sh
-
-
-
-
-```
-
-<p><b></b></p>
-
-```sh
-
-
-
-
-```
-
-<p><b></b></p>
-
-```sh
-
-
-
-
-```
-
-<p><b></b></p>
-
-```sh
-
-
-
-
-```
-
-<p><b></b></p>
-
-```sh
-
-
-
-
-```
-
-<p><b></b></p>
-
-```sh
-
-
-
-
-```
-
-<p><b></b></p>
-
-```sh
-
-
-
-
-```
-
-<p><b></b></p>
-
-```sh
-
-
-
-
-```
 
 </div>

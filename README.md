@@ -966,10 +966,11 @@ http://<ip>:9090/targets
 <img src="./public/assets/Jenkins-17.png" alt="Jenkins-17.png">
 
 <img src="./public/assets/Jenkins-18.png" alt="Jenkins-18.png">
+
 <p><b>Click on Apply and save.</b></p>
 
+<p><b>Next, we will log in to Jenkins and start to configure our Pipeline in Jenkins</b></p>
 
-<p><b></b></p>
-
+<h2><b>Step 7 - Install Plugins like JDK, Sonarqube Scanner, NodeJs, OWASP Dependency Check</b></h2>
 
 </div>

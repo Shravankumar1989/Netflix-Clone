@@ -899,19 +899,16 @@ http://<ip>:9090/targets
 
 <p><b>You will see Jenkins is added to it</b></p>
 
+<img src="./public/assets/Prometheus-3.png" alt="Prometheus-3.png">
 
 
+<p><b>Let's add Dashboard for a better view in Grafana</b></p>
+
+<p><b>Click On Dashboard --> + symbol --> Import Dashboard</b></p>
+
+<p><b>Use Id 9964 and click on load</b></p>
 
 
-
-```sh
-
-
-
-
-```
-
-<p><b></b></p>
 
 ```sh
 

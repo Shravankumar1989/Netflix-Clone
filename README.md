@@ -805,7 +805,29 @@ sudo systemctl status grafana-server
 <public-ip:9090>
 
 ```
+
+<img src="./public/assets/Grafana-5.png" alt="Grafana-5.png">
+
+<p><b>Click on Save and Test.</b></p>
+
+<img src="./public/assets/Grafana-6.png" alt="Grafana-6.png">
+
+<p><b>Let's add Dashboard for a better view</b></p>
+
+<img src="./public/assets/Grafana-7.png" alt="Grafana-7.png">
+
+<p><b>Click on Import Dashboard paste this code 1860 and click on load</b></p>
+
+<img src="./public/assets/Grafana-8.png" alt="Grafana-8.png">
+
+
+
+
+
+
 <p><b>To create a static target, you need to add job_name with static_configs. go to Prometheus server</b></p>
+
+
 
 ```sh
 #Open the Prometheus configuration file again for further editing.

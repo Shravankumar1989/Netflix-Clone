@@ -838,11 +838,11 @@ sudo systemctl status grafana-server
 
 <p><b>Search for Prometheus and install it</b></p>
 
-<img src="./public/assets/Jenkins-5.png" alt=Jenkins-5.png">
+<img src="./public/assets/Jenkins-5.png" alt="Jenkins-5.png">
 
 <p><b>Once that is done you will Prometheus is set to /Prometheus path in system configurations</b></p>
 
-<img src="./public/assets/Jenkins-6.png" alt=Jenkins-6.png">
+<img src="./public/assets/Jenkins-6.png" alt="Jenkins-6.png">
 
 <p><b>Nothing to change click on apply and save</b></p>
 

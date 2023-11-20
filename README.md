@@ -973,4 +973,23 @@ http://<ip>:9090/targets
 
 <h2><b>Step 7 - Install Plugins like JDK, Sonarqube Scanner, NodeJs, OWASP Dependency Check</b></h2>
 
+<h2><b>7.1 - Install Plugin</b></h2>
+
+<p><b>Goto Manage Jenkins →Plugins → Available Plugins →</b></p>
+
+<p><b>Install below plugins</b></p>
+
+<p><b>1 → Eclipse Temurin Installer (Install without restart)</b></p>
+
+<p><b>2 → SonarQube Scanner (Install without restart)</b></p>
+
+<p><b>3 → NodeJs Plugin (Install Without restart)</b></p>
+
+<img src="./public/assets/Jenkins-19.png" alt="Jenkins-19.png">
+
+<img src="./public/assets/Jenkins-20.png" alt="Jenkins-20.png">
+
+<p><b></b></p>
+<p><b></b></p>
+
 </div>

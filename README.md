@@ -708,6 +708,8 @@ http://<ip>:9090/targets
 
 ```
 
+<img src="./public/assets/Prometheus-3.png" alt="Prometheus-3.png">
+
 <h2><b>Install Grafana on Ubuntu 22.04</b></h2>
 <p><b>To visualize metrics we can use Grafana. There are many different data sources that Grafana supports, one of them is Prometheus.</b></p>
 <p><b>First, let's make sure that all the dependencies are installed.</b></p>

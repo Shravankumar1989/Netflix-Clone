@@ -1648,9 +1648,48 @@ http://<ip>:9090/targets
 
 ```
 
-<p><b></b></p>
-<p><b></b></p>
-<p><b></b></p>
+<img src="./public/assets/Step11-4.png" alt="Step11-4.png">
+
+<p><b>final step to deploy on the Kubernetes cluster</b></p>
+
+```sh
+
+// Jenkins pipeline stage for deploying to Kubernetes
+stage('Deploy to kubernetes') {
+    steps {
+        script {
+            // Change directory to 'Kubernetes' where deployment configurations are stored
+            dir('Kubernetes') {
+                // Set up Kubernetes configuration for deployment
+                withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'k8s', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
+                    // Apply the Kubernetes deployment configuration
+                    sh 'kubectl apply -f deployment.yml'
+
+                    // Apply the Kubernetes service configuration
+                    sh 'kubectl apply -f service.yml'
+                }   
+            }
+        }
+    }
+}
+
+```
+
+<p><b>stage view</b></p>
+
+<img src="./public/assets/Step11-5.png" alt="Step11-5.png">
+
+<p><b>In the Kubernetes cluster(master) give this command</b></p>
+
+
+```sh
+
+kubectl get all 
+kubectl get svc
+
+
+```
+
 <p><b></b></p>
 <p><b></b></p>
 <p><b></b></p>

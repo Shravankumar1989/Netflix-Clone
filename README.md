@@ -1317,11 +1317,9 @@ stage('Deploy to container') {
 
 <img src="./public/assets/Step10-7.png" alt="Step10-7.png">
 
-<h2><b>Step 11 - Kuberenetes Setup</b></h2>
+<h2><b>Step 12 - Kubernetes master and slave setup on Ubuntu (20.04)</b></h2>
 
 <p><b>Connect your machines to Putty or Mobaxtreme</b></p>
-
-<p><b>Take-Two Ubuntu 20.04 instances one for k8s master and the other one for worker.</b></p>
 
 <p><b>Take-Two Ubuntu 20.04 instances one for k8s master and the other one for worker.</b></p>
 
@@ -1691,8 +1689,15 @@ kubectl get svc
 
 ```
 
-<h2><b>STEP 12 - Kubernetes master and slave setup on Ubuntu (20.04)</b></h2>
-<h3><b>Access from a Web browser with "<public-ip-of-slave:service port>"</b></h3>
+<h2><b>STEP 13 -  Access the Netflix app on the Browser.</b></h2>
+
+
+```sh
+#Access from a Web browser with "<public-ip-of-slave:service port>"
+<public-ip-of-slave:service port>
+
+
+```
 
 <p><b>output:</b></p>
 
@@ -1708,7 +1713,7 @@ kubectl get svc
 
 <img src="./public/assets/Step12-4.png" alt="Step12-4.png">
 
-<h2><b>STEP 13 - Terminate the AWS EC2 Instances.</b></h2>
+<h2><b>STEP 14 - Terminate the AWS EC2 Instances.</b></h2>
   
 <h3><b>Complete Pipeline</b></h3>
 

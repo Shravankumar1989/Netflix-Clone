@@ -1691,7 +1691,8 @@ kubectl get svc
 
 ```
 
-<h2><b>STEP 12 - Access from a Web browser with "<public-ip-of-slave:service port>"</b></h2>
+<h2><b>STEP 12 - Kubernetes master and slave setup on Ubuntu (20.04)</b></h2>
+<h3><b>Access from a Web browser with "<public-ip-of-slave:service port>"</b></h3>
 
 <p><b>output:</b></p>
 

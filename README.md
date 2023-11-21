@@ -1706,9 +1706,9 @@ kubectl get svc
 
 <img src="./public/assets/Step12-4.png" alt="Step12-4.png">
 
-<h2><b>STEP 13 - erminate instances.</b></h2>
+<h2><b>STEP 13 - Terminate the AWS EC2 Instances.</b></h2>
   
-<h3><b>STEP 13 - erminate instances.</b></h3>
+<h3><b>Complete Pipeline</b></h3>
 
 ```sh
 

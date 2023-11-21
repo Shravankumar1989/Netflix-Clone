@@ -1051,4 +1051,96 @@ http://<ip>:9090/targets
 
 <p><b>Add details</b></p>
 
+```sh
+
+#in url section of quality gate
+<http://jenkins-public-ip:8080>/sonarqube-webhook/
+
+```
+<img src="./public/assets/SonarQube-13.png" alt="SonarQube-13.png">
+
+<p><b>Let's go to our Pipeline and add the script in our Pipeline Script.</b></p>
+
+```sh
+
+// Define the pipeline
+pipeline {
+    // Define the agent to run the pipeline
+    agent any
+
+    // Tools required in the environment
+    tools {
+        jdk 'jdk17'       // Use JDK 17
+        nodejs 'node16'   // Use Node.js 16
+    }
+
+    // Environment variables
+    environment {
+        SCANNER_HOME = tool 'sonar-scanner'  // Define the path for the SonarQube scanner
+    }
+
+    // Define the stages of the pipeline
+    stages {
+        // Clean the workspace before starting
+        stage('clean workspace') {
+            steps {
+                cleanWs()
+            }
+        }
+
+        // Checkout code from a Git repository
+        stage('Checkout from Git') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Shravankumar1989/Netflix-clone.git'
+            }
+        }
+
+        // Run SonarQube analysis
+        stage("Sonarqube Analysis ") {
+            steps {
+                withSonarQubeEnv('sonar-server') {
+                    // Execute SonarQube scanner with project configuration
+                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Netflix \
+                    -Dsonar.projectKey=Netflix '''
+                }
+            }
+        }
+
+        // Check the quality gate status
+        stage("quality gate") {
+           steps {
+                script {
+                    // Wait for the quality gate result
+                    waitForQualityGate abortPipeline: false, credentialsId: 'Sonar-token' 
+                }
+            } 
+        }
+
+        // Install project dependencies
+        stage('Install Dependencies') {
+            steps {
+                sh "npm install"
+            }
+        }
+    }
+
+    // Define post-build actions
+    post {
+        // Actions to perform after every build
+        always {
+            // Send an email with the build log and other details
+            emailext attachLog: true,
+                subject: "'${currentBuild.result}'",
+                body: "Project: ${env.JOB_NAME}<br/>" +
+                      "Build Number: ${env.BUILD_NUMBER}<br/>" +
+                      "URL: ${env.BUILD_URL}<br/>",
+                to: 'patilshravankumar3@gmail.com',
+                attachmentsPattern: 'trivyfs.txt,trivyimage.txt'
+        }
+    }
+}
+
+```
+
+<p><b>Click on Build now, you will see the stage view like this.</b></p>
 </div>

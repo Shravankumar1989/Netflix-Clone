@@ -1227,7 +1227,7 @@ stage('TRIVY FS SCAN') {
 
 <p><b>Add DockerHub Username and Password under Global Credentials</b></p>
 
-<img src="./public/assets/Step10-4.png" alt="Step10-4.png">
+<img src="./public/assets/Step10-3.png" alt="Step10-3.png">
 
 <p><b>Add this stage to Pipeline Script</b></p>
 
@@ -1267,11 +1267,11 @@ stage("TRIVY") {
 
 <p><b>You will see the output below, with a dependency trend.</b></p>
 
-<img src="./public/assets/Step10-5.png" alt="Step10-5.png">
+<img src="./public/assets/Step10-4.png" alt="Step10-4.png">
 
 <p><b>When you log in to Dockerhub, you will see a new image is created</b></p>
 
-<img src="./public/assets/Step10-6.png" alt="Step10-6.png">
+<img src="./public/assets/Step10-5.png" alt="Step10-5.png">
 
 <p><b>Now Run the container to see if the game coming up or not by adding the below stage</b></p>
 
@@ -1308,10 +1308,13 @@ stage('Deploy to container') {
 
 <p><b>stage view</b></p>
 
-<img src="./public/assets/Step10-7.png" alt="Step10-7.png">
+<img src="./public/assets/Step10-6.png" alt="Step10-6.png">
 
-<p><b>COPY</b></p>
-<p><b>COPY</b></p>
+<p><b><Jenkins-public-ip:8081></b></p>
+  
+<p><b>You will get this output</b></p>
+
+<img src="./public/assets/Step10-7.png" alt="Step10-7.png">
 <p><b>COPY</b></p>
 <p><b>COPY</b></p>
 <p><b>COPY</b></p>

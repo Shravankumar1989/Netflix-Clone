@@ -1201,6 +1201,119 @@ stage('TRIVY FS SCAN') {
 
 <img src="./public/assets/Step9-4.png" alt="Step9-4.png">
 
+<h2><b>Step 10 - Docker Image Build and Push</b></h2>
+
 <p><b></b></p>
+
+<p><b>We need to install the Docker tool in our system, Goto Dashboard → Manage Plugins → Available plugins → Search for Docker and install these plugins</b></p>
+
+<p><b>Docker</b></p>
+
+<p><b>Docker Commons</b></p>
+
+<p><b>Docker Pipeline</b></p>
+
+<p><b>Docker API</b></p>
+
+<p><b>docker-build-step</b></p>
+
+<p><b>and click on install without restart</b></p>
+
+<img src="./public/assets/Step10-1.png" alt="Step10-1.png">
+
+<p><b>Now, goto Dashboard → Manage Jenkins → Tools →</b></p>
+
+<img src="./public/assets/Step10-2.png" alt="Step10-2.png">
+
+<p><b>Add DockerHub Username and Password under Global Credentials</b></p>
+
+<img src="./public/assets/Step10-4.png" alt="Step10-4.png">
+
+<p><b>Add this stage to Pipeline Script</b></p>
+
+<p><b>COPY</b></p>
+
+```sh
+
+// Stage for building and pushing Docker image
+stage("Docker Build & Push") {
+    steps {
+        script {
+            // Log in to the Docker registry
+            withDockerRegistry(credentialsId: 'docker', toolName: 'docker') {   
+                // Build the Docker image with a specified API key as a build argument
+                sh "docker build --build-arg TMDB_V3_API_KEY=Aj7ay86fe14eca3e76869b92 -t netflix ."
+
+                // Tag the built image
+                sh "docker tag netflix shravankumarp/netflix:latest "
+
+                // Push the tagged image to the Docker registry
+                sh "docker push shravankumarp/netflix:latest "
+            }
+        }
+    }
+}
+
+// Stage for scanning the Docker image using Trivy
+stage("TRIVY") {
+    steps {
+        // Run Trivy scan on the Docker image and output the results to 'trivyimage.txt'
+        sh "trivy image shravankumarp/netflix:latest > trivyimage.txt" 
+    }
+}
+
+
+```
+
+<p><b>You will see the output below, with a dependency trend.</b></p>
+
+<img src="./public/assets/Step10-5.png" alt="Step10-5.png">
+
+<p><b>When you log in to Dockerhub, you will see a new image is created</b></p>
+
+<img src="./public/assets/Step10-6.png" alt="Step10-6.png">
+
+<p><b>Now Run the container to see if the game coming up or not by adding the below stage</b></p>
+
+```sh
+
+// Stage for building and pushing Docker image
+stage("Docker Build & Push") {
+    steps {
+        script {
+            // Log in to the Docker registry
+            withDockerRegistry(credentialsId: 'docker', toolName: 'docker') {   
+                // Build the Docker image with a specified API key as a build argument
+                sh "docker build --build-arg TMDB_V3_API_KEY=Aj7ay86fe14eca3e76869b92 -t netflix ."
+
+                // Tag the built image
+                sh "docker tag netflix shravankumarp/netflix:latest "
+
+                // Push the tagged image to the Docker registry
+                sh "docker push shravankumarp/netflix:latest "
+            }
+        }
+    }
+}
+
+// Stage for deploying the application in a Docker container
+stage('Deploy to container') {
+    steps {
+        // Run the Docker container in detached mode, mapping port 8081 on the host to port 80 in the container
+        sh 'docker run -d --name netflix -p 8081:80 sevenajay/netflix:latest'
+    }
+}
+
+```
+
+<p><b>stage view</b></p>
+
+<img src="./public/assets/Step10-7.png" alt="Step10-7.png">
+
+<p><b>COPY</b></p>
+<p><b>COPY</b></p>
+<p><b>COPY</b></p>
+<p><b>COPY</b></p>
+<p><b>COPY</b></p>
 
 </div>

@@ -1300,7 +1300,7 @@ stage("Docker Build & Push") {
 stage('Deploy to container') {
     steps {
         // Run the Docker container in detached mode, mapping port 8081 on the host to port 80 in the container
-        sh 'docker run -d --name netflix -p 8081:80 sevenajay/netflix:latest'
+        sh 'docker run -d --name netflix -p 8081:80 shravankumarp/netflix:latest'
     }
 }
 
@@ -1694,12 +1694,155 @@ kubectl get svc
 
 <p><b>output:</b></p>
 
-<p><b></b></p>
-<p><b></b></p>
-<p><b></b></p>
-<p><b></b></p>
-<p><b></b></p>
-<p><b></b></p>
+<img src="./public/assets/Step10-7.png" alt="Step10-7.png">
 
+<p><b>Monitoring</b></p>
+
+<img src="./public/assets/Step12-1.png" alt="Step12-1.png">
+
+<img src="./public/assets/Step12-2.png" alt="Step12-2.png">
+
+<img src="./public/assets/Step12-3.png" alt="Step12-3.png">
+
+<img src="./public/assets/Step12-4.png" alt="Step12-4.png">
+
+<h2><b>STEP 13 - erminate instances.</b></h2>
+  
+<h3><b>STEP 13 - erminate instances.</b></h3>
+
+```sh
+
+// Define the pipeline configuration
+pipeline {
+    // Specify that this pipeline can run on any available agent
+    agent any
+
+    // Define tools required for the build
+    tools {
+        jdk 'jdk17'       // Use JDK version 17
+        nodejs 'node16'   // Use Node.js version 16
+    }
+
+    // Set environment variables
+    environment {
+        SCANNER_HOME = tool 'sonar-scanner'  // Define the path for the SonarQube scanner
+    }
+
+    // Define the stages in the pipeline
+    stages {
+        // Clean the workspace before starting the build
+        stage('clean workspace') {
+            steps {
+                cleanWs()
+            }
+        }
+
+        // Checkout code from the specified Git repository
+        stage('Checkout from Git') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Aj7Ay/Netflix-clone.git'
+            }
+        }
+
+        // Run SonarQube analysis
+        stage("Sonarqube Analysis ") {
+            steps {
+                withSonarQubeEnv('sonar-server') {
+                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Netflix \
+                    -Dsonar.projectKey=Netflix '''
+                }
+            }
+        }
+
+        // Evaluate the quality gate result
+        stage("quality gate") {
+           steps {
+                script {
+                    waitForQualityGate abortPipeline: false, credentialsId: 'Sonar-token' 
+                }
+            } 
+        }
+
+        // Install project dependencies
+        stage('Install Dependencies') {
+            steps {
+                sh "npm install"
+            }
+        }
+
+        // Perform OWASP dependency check
+        stage('OWASP FS SCAN') {
+            steps {
+                dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit', odcInstallation: 'DP-Check'
+                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+            }
+        }
+
+        // Perform Trivy filesystem scan
+        stage('TRIVY FS SCAN') {
+            steps {
+                sh "trivy fs . > trivyfs.txt"
+            }
+        }
+
+        // Build and push Docker image
+        stage("Docker Build & Push") {
+            steps {
+                script {
+                   withDockerRegistry(credentialsId: 'docker', toolName: 'docker') {   
+                       sh "docker build --build-arg TMDB_V3_API_KEY=AJ7AYe14eca3e76864yah319b92 -t netflix ."
+                       sh "docker tag netflix shravankumarp/netflix:latest "
+                       sh "docker push shravankumarp/netflix:latest "
+                    }
+                }
+            }
+        }
+
+        // Perform Trivy image scan
+        stage("TRIVY") {
+            steps {
+                sh "trivy image shravankumarp/netflix:latest > trivyimage.txt" 
+            }
+        }
+
+        // Deploy the application in a Docker container
+        stage('Deploy to container') {
+            steps {
+                sh 'docker run -d --name netflix -p 8081:80 shravankumarp/netflix:latest'
+            }
+        }
+
+        // Deploy the application to a Kubernetes cluster
+        stage('Deploy to kubernetes') {
+            steps {
+                script {
+                    dir('Kubernetes') {
+                        withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'k8s', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
+                            sh 'kubectl apply -f deployment.yml'
+                            sh 'kubectl apply -f service.yml'
+                        }   
+                    }
+                }
+            }
+        }
+    }
+
+    // Define actions to perform after the pipeline execution
+    post {
+        always {
+            // Send an email notification with the build result
+            emailext attachLog: true,
+                subject: "'${currentBuild.result}'",
+                body: "Project: ${env.JOB_NAME}<br/>" +
+                    "Build Number: ${env.BUILD_NUMBER}<br/>" +
+                    "URL: ${env.BUILD_URL}<br/>",
+                to: 'patilshravankumar3@gmail.com',
+                attachmentsPattern: 'trivyfs.txt,trivyimage.txt'
+        }
+    }
+}
+
+
+```
 
 </div>

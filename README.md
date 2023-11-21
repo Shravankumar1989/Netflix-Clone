@@ -1148,5 +1148,42 @@ pipeline {
 
 <p><b>To see the report, you can go to Sonarqube Server and go to Projects.</b></p>
 
+<img src="./public/assets/SonarQube-14.png" alt="SonarQube-14.png">
+
 <p><b>You can see the report has been generated and the status shows as passed. You can see that there are 3.2k lines it scanned. To see a detailed report, you can go to issues.</b></p>
+
+<h2><b>Step 9 - Install OWASP Dependency Check Plugins</b></h2>
+
+<p><b>GotoDashboard → Manage Jenkins → Plugins → OWASP Dependency-Check. Click on it and install it without restart.</b></p>
+
+<img src="./public/assets/Step9-1.png" alt="Step9-1.png">
+
+<p><b>First, we configured the Plugin and next, we had to configure the Tool</b></p>
+
+<p><b>Goto Dashboard → Manage Jenkins → Tools →</b></p>
+
+<img src="./public/assets/Step9-2.png" alt="Step9-2.png">
+
+<p><b>Click on Apply and Save here.</b></p>
+
+<p><b>Now go configure → Pipeline and add this stage to your pipeline and build.</b></p>
+
+```sh
+
+#Access the Prometheus targets page in a web browser (replace <ip> with your server's IP)
+http://<ip>:9090/targets
+
+
+```
+
+<p><b>The stage view would look like this,</b></p>
+
+<img src="./public/assets/Step9-3.png" alt="Step9-3.png">
+
+<p><b>ou will see that in status, a graph will also be generated and Vulnerabilities.</b></p>
+
+<img src="./public/assets/Step9-4.png" alt="Step9-4.png">
+
+<p><b></b></p>
+
 </div>

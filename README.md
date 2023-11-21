@@ -1001,7 +1001,8 @@ http://<ip>:9090/targets
 
 <p><b>create a job as Netflix Name, select pipeline and click on ok.</b></p>
 
-<h2><b>Step 8 - Configure Sonar Server in Manage Jenkins</b></h2>
+<h2><b>Step 8 -  Create a Pipeline Project in Jenkins using a Declarative Pipeline</b></h2>
+<h3><b>Configure Sonar Server in Manage Jenkins</b></h3>
 
 <p><b>Grab the Public IP Address of your EC2 Instance, Sonarqube works on Port 9000, so <Public IP>:9000. Goto your Sonarqube Server. Click on Administration → Security → Users → Click on Tokens and Update Token → Give it a name → and click on Generate Token</b></p>
 

@@ -1452,6 +1452,202 @@ sudo kubeadm join <master-node-ip>:<master-node-port> --token <token> --discover
 
 <p><b>First, let's create a system user for Node Exporter by running the following command:</b></p>
 
+```sh
+
+# Create a system user for Node Exporter without a home directory and with a non-interactive shell
+sudo useradd \
+    --system \
+    --no-create-home \
+    --shell /bin/false node_exporter
+
+```
+
+<p><b>Use the wget command to download the binary.</b></p>
+
+```sh
+
+# Download Node Exporter binary
+wget https://github.com/prometheus/node_exporter/releases/download/v1.6.1/node_exporter-1.6.1.linux-amd64.tar.gz
+
+```
+<p><b>Extract the node exporter from the archive.</b></p>
+
+```sh
+
+# Extract the Node Exporter tarball
+tar -xvf node_exporter-1.6.1.linux-amd64.tar.gz
+
+```
+
+<p><b>Move binary to the /usr/local/bin.</b></p>
+
+```sh
+
+# Move the Node Exporter binary to a directory in the system path
+sudo mv \
+  node_exporter-1.6.1.linux-amd64/node_exporter \
+  /usr/local/bin/
+
+```
+
+<p><b>Clean up, and delete node_exporter archive and a folder.</b></p>
+
+```sh
+
+# Remove the extracted files and tarball
+rm -rf node_exporter*
+
+```
+
+<p><b>Verify that you can run the binary.</b></p>
+
+```sh
+
+# Check the version of Node Exporter
+node_exporter --version
+
+```
+
+<p><b>Node Exporter has a lot of plugins that we can enable. If you run Node Exporter help you will get all the options.</b></p>
+
+```sh
+
+# Display help information for Node Exporter
+node_exporter --help
+
+```
+
+<p><b>--collector.logind We're going to enable the login controller, just for the demo.</b></p>
+
+<p><b>Next, create a similar systemd unit file.</b></p>
+
+```sh
+
+# Create or edit the Node Exporter service file
+sudo vim /etc/systemd/system/node_exporter.service
+
+```
+
+<p><b>node_exporter.service</b></p>
+
+```sh
+
+# Unit section: metadata and dependencies
+[Unit]
+Description=Node Exporter                                # Description of the service
+Wants=network-online.target                              # Indicates the service wants the network to be online
+After=network-online.target                              # Ensures the service starts after the network is online
+
+StartLimitIntervalSec=500                                # Time interval for restarting the service
+StartLimitBurst=5                                        # Number of restarts allowed in the interval
+
+# Service section: how the service should be run
+[Service]
+User=node_exporter                                       # User under which the service will run
+Group=node_exporter                                      # Group under which the service will run
+Type=simple                                              # Type of service (simple means systemd considers the service started as soon as the ExecStart command runs)
+Restart=on-failure                                       # Restart policy (on failure)
+RestartSec=5s                                            # Time to wait before restarting the service
+ExecStart=/usr/local/bin/node_exporter \                 # Command to start Node Exporter
+    --collector.logind                                   # Enable the login session collector
+
+# Install section: how this service should be installed
+[Install]
+WantedBy=multi-user.target                               # The target to be used when the service is enabled
+
+```
+
+<p><b>Replace Prometheus user and group to node_exporter, and update the ExecStart command.</b></p>
+
+<p><b>To automatically start the Node Exporter after reboot, enable the service.</b></p>
+
+```sh
+
+# Enable the Node Exporter service to start on boot
+sudo systemctl enable node_exporter
+
+```
+<p><b>Then start the Node Exporter.</b></p>
+
+```sh
+
+# Start the Node Exporter service
+sudo systemctl start node_exporter
+
+```
+
+<p><b>Check the status of Node Exporter with the following command:</b></p>
+
+```sh
+
+# Check the status of the Node Exporter service
+sudo systemctl status node_exporter
+
+```
+
+<p><b>If you have any issues, check logs with journalctl</b></p>
+
+```sh
+
+# Follow the logs of the Node Exporter service
+journalctl -u node_exporter -f --no-pager
+
+```
+
+<p><b>To create a static target, you need to add job_name with static_configs. Go to Prometheus server</b></p>
+
+```sh
+
+# Edit the Prometheus configuration file to add Node Exporter targets
+sudo vim /etc/prometheus/prometheus.yml
+
+```
+
+<p><b>prometheus.yml</b></p>
+
+```sh
+
+# Add Node Exporter targets to the Prometheus configuration
+  - job_name: node_export_masterk8s
+    static_configs:
+      - targets: ["<master-ip>:9100"]
+
+  - job_name: node_export_workerk8s
+    static_configs:
+      - targets: ["<worker-ip>:9100"]
+
+```
+
+<p><b>By default, Node Exporter will be exposed on port 9100.</b></p>
+
+<p><b>Since we enabled lifecycle management via API calls, we can reload the Prometheus config without restarting the service and causing downtime.</b></p>
+
+<p><b>Before, restarting check if the config is valid.</b></p>
+
+```sh
+
+# Check the Prometheus configuration file for errors
+promtool check config /etc/prometheus/prometheus.yml
+
+```
+<p><b>Then, you can use a POST request to reload the config.</b></p>
+
+```sh
+
+# Reload Prometheus configuration
+curl -X POST http://localhost:9090/-/reload
+
+```
+
+<p><b>Check the targets section</b></p>
+
+```sh
+
+# Access Prometheus targets in a web browser
+http://<ip>:9090/targets
+
+```
+
 <p><b></b></p>
 <p><b></b></p>
 <p><b></b></p>
@@ -1462,10 +1658,6 @@ sudo kubeadm join <master-node-ip>:<master-node-port> --token <token> --discover
 <p><b></b></p>
 <p><b></b></p>
 <p><b></b></p>
-<p><b></b></p>
-<p><b></b></p>
-<p><b></b></p>
-<p><b></b></p>
-<p><b></b></p>
+
 
 </div>

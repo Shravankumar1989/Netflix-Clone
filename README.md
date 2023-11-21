@@ -990,6 +990,10 @@ http://<ip>:9090/targets
 <img src="./public/assets/Jenkins-20.png" alt="Jenkins-20.png">
 
 <h3><b>7B - Configure Java and Nodejs in Global Tool Configuration</b></h3>
+
 <p><b>Goto Manage Jenkins → Tools → Install JDK(17) and NodeJs(16)→ Click on Apply and Save</b></p>
 
+<img src="./public/assets/Jenkins-21.png" alt="Jenkins-21.png">
+
+<img src="./public/assets/Jenkins-22.png" alt="Jenkins-22.png">
 </div>

@@ -1143,4 +1143,10 @@ pipeline {
 ```
 
 <p><b>Click on Build now, you will see the stage view like this.</b></p>
+
+<img src="./public/assets/Pipeline-1.png" alt="Pipeline-1.png">
+
+<p><b>To see the report, you can go to Sonarqube Server and go to Projects.</b></p>
+
+<p><b>You can see the report has been generated and the status shows as passed. You can see that there are 3.2k lines it scanned. To see a detailed report, you can go to issues.</b></p>
 </div>

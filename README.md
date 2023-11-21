@@ -1690,7 +1690,10 @@ kubectl get svc
 
 ```
 
-<p><b></b></p>
+<h2><b>STEP 12 - Access from a Web browser with "<public-ip-of-slave:service port>"</b></h2>
+
+<p><b>output:</b></p>
+
 <p><b></b></p>
 <p><b></b></p>
 <p><b></b></p>

@@ -1170,8 +1170,25 @@ pipeline {
 
 ```sh
 
-#Access the Prometheus targets page in a web browser (replace <ip> with your server's IP)
-http://<ip>:9090/targets
+// OWASP Dependency-Check stage
+stage('OWASP FS SCAN') {
+    steps {
+        // Run the OWASP Dependency-Check
+        dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit', 
+                        odcInstallation: 'DP-Check'
+
+        // Publish the Dependency-Check report
+        dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+    }
+}
+
+// Trivy Filesystem Scan stage
+stage('TRIVY FS SCAN') {
+    steps {
+        // Run the Trivy filesystem scan and output the results to 'trivyfs.txt'
+        sh "trivy fs . > trivyfs.txt"
+    }
+}
 
 
 ```

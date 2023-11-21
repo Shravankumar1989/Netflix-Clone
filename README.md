@@ -1315,8 +1315,157 @@ stage('Deploy to container') {
 <p><b>You will get this output</b></p>
 
 <img src="./public/assets/Step10-7.png" alt="Step10-7.png">
-<p><b>COPY</b></p>
-<p><b>COPY</b></p>
-<p><b>COPY</b></p>
+
+<h2><b>Step 11 - Kuberenetes Setup</b></h2>
+
+<p><b>Connect your machines to Putty or Mobaxtreme</b></p>
+
+<p><b>Take-Two Ubuntu 20.04 instances one for k8s master and the other one for worker.</b></p>
+
+<p><b>Take-Two Ubuntu 20.04 instances one for k8s master and the other one for worker.</b></p>
+
+<p><b>Kubectl is to be installed on Jenkins also</b></p>
+
+```sh
+
+# Update the package list
+sudo apt update
+
+# Install the curl command-line tool
+sudo apt install curl
+
+# Download the latest stable version of kubectl
+curl -LO https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl
+
+# Install kubectl to a system-wide directory with appropriate permissions
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
+# Check the installed version of kubectl
+kubectl version --client
+
+```
+
+<p><b>Part 1 ----------Master Node------------</b></p>
+
+```sh
+
+# Set the hostname for the Kubernetes master node
+sudo hostnamectl set-hostname K8s-Master
+
+```
+
+<p><b>----------Worker Node------------</b></p>
+
+```sh
+
+# Set the hostname for the Kubernetes worker node
+sudo hostnamectl set-hostname K8s-Worker
+
+```
+
+<p><b>Part 2 ------------Both Master & Node ------------</b></p>
+
+```sh
+
+# Update the package list
+sudo apt-get update 
+
+# Install Docker, the container runtime
+sudo apt-get install -y docker.io
+
+# Add the 'Ubuntu' user to the 'docker' group
+sudo usermod –aG docker Ubuntu
+
+# Change to the new 'docker' group without logging out and back in
+newgrp docker
+
+# Set permissions for the Docker socket
+sudo chmod 777 /var/run/docker.sock
+
+# Add the GPG key for the Kubernetes package repository
+sudo curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+
+# Add the Kubernetes package repository
+sudo tee /etc/apt/sources.list.d/kubernetes.list <<EOF
+deb https://apt.kubernetes.io/ kubernetes-xenial main
+EOF
+
+# Update the package list with the new Kubernetes repository
+sudo apt-get update
+
+# Install kubelet, kubeadm, and kubectl
+sudo apt-get install -y kubelet kubeadm kubectl
+
+# Install the kube-apiserver snap package
+sudo snap install kube-apiserver
+
+```
+
+<p><b>Part 3 --------------- Master ---------------</b></p>
+
+```sh
+
+# Initialize the Kubernetes master node
+sudo kubeadm init --pod-network-cidr=10.244.0.0/16
+
+# Exit from root and set up kube config
+# (Run the following commands as a non-root user)
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+# Apply the Flannel CNI network overlay
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+
+
+```
+
+<p><b>----------Worker Node------------</b></p>
+
+```sh
+
+# Join a worker node to the Kubernetes cluster (replace the placeholders with actual values)
+sudo kubeadm join <master-node-ip>:<master-node-port> --token <token> --discovery-token-ca-cert-hash <hash>
+
+```
+
+<p><b>Copy the config file to Jenkins master or the local file manager and save it</b></p>
+
+<img src="./public/assets/Step11-1.png" alt="Step11-1.png">
+
+<p><b>copy it and save it in documents or another folder save it as secret-file.txt</b></p>
+
+<p><b>Note: create a secret-file.txt in your file explorer save the config in it and use this at the kubernetes credential section.</b></p>
+
+<p><b>Install Kubernetes Plugin, Once it's installed successfully</b></p>
+
+<img src="./public/assets/Step11-2.png" alt="Step11-2.png">
+
+<p><b>goto manage Jenkins --> manage credentials --> Click on Jenkins global --> add credentials</b></p>
+
+<img src="./public/assets/Step11-3.png" alt="Step11-3.png">
+
+
+<h3><b>Install Node_exporter on both master and worker</b></h3>
+
+<p><b>Let's add Node_exporter on Master and Worker to monitor the metrics</b></p>
+
+<p><b>First, let's create a system user for Node Exporter by running the following command:</b></p>
+
+<p><b></b></p>
+<p><b></b></p>
+<p><b></b></p>
+<p><b></b></p>
+<p><b></b></p>
+<p><b></b></p>
+<p><b></b></p>
+<p><b></b></p>
+<p><b></b></p>
+<p><b></b></p>
+<p><b></b></p>
+<p><b></b></p>
+<p><b></b></p>
+<p><b></b></p>
+<p><b></b></p>
 
 </div>
